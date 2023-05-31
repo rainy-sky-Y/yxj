@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //跳转到搜索页面
                 Intent intent = new Intent(MainActivity.this,SearchActivity.class);
                 startActivity(intent);
             }
@@ -75,14 +76,13 @@ public class MainActivity extends AppCompatActivity {
         //列表item点击事件
         ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
+            //跳转到商品详情页面，传递商品id过去，到那个页面再通过商品id获取信息
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 int product_id = products.get(i).getProductId();
                 Intent intent = new Intent(MainActivity.this,ProductDetailActivity.class);
                 intent.putExtra("product_id",product_id);
                 startActivity(intent);
                 Log.d("Item", "onItemClick: ");
-
             }
         });
 
@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
 
@@ -119,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(String result) {
                 try {
                     JSONArray pro_list = new JSONObject(result).getJSONArray("Data");
-                    if (pro_list.length()==0){
+
+                    if (pro_list.length()<10){    //如果返回的商品列表长度小于10说明没有更多的商品了，末尾直接显示没有更多
                         tv.setVisibility(View.VISIBLE);
                         pb.setVisibility(View.GONE);
                     }
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(Exception e) {
-                Toast.makeText(MainActivity.this,e.toString(),Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onError: ",e );
             }
         });
 
