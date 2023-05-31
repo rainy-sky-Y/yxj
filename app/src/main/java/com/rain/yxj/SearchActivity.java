@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class SearchActivity extends AppCompatActivity {
     private ListView ls;
     private Button search;
     private EditText search_edit;
+    private TextView no_result;
     List<Product> products = new ArrayList<>();
     ProductAdapter pa;
 
@@ -44,6 +46,7 @@ public class SearchActivity extends AppCompatActivity {
         ls = findViewById(R.id.ls);
         search = findViewById(R.id.search);
         search_edit = findViewById(R.id.search_edit);
+        no_result = findViewById(R.id.noresult);
 
     }
     //初始化事件
@@ -60,12 +63,17 @@ public class SearchActivity extends AppCompatActivity {
     }
     //初始化数据
     private void initProduct(String key){
+        products.clear();
         String url = "http://goods.yuanxiaojiang.com/api/product/search?key="+key;
         OkhttpUtils.getInstance().doGet(url, new CallBack() {
             @Override
             public void onSuccess(String result) {
                 try {
                     JSONArray pro_list = new JSONObject(result).getJSONArray("Data");
+                    if(pro_list.length() == 0){
+                        no_result.setVisibility(View.VISIBLE);
+
+                    }
                     Product product;
                     for (int i = 0; i < pro_list.length(); i++) {
                         JSONObject object = (JSONObject) pro_list.opt(i);

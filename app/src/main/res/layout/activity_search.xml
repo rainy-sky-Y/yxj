@@ -31,6 +31,8 @@
     </ListView>
 
     <TextView
+        android:id="@+id/noresult"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="没有符合条件的商品"/>
