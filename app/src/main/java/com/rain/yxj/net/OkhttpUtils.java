@@ -5,8 +5,6 @@ import android.os.Looper;
 
 import androidx.annotation.NonNull;
 
-import com.rain.yxj.CallBack;
-
 import java.io.IOException;
 
 import okhttp3.Call;

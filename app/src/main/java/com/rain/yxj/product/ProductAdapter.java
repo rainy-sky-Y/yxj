@@ -1,4 +1,4 @@
-package com.rain.yxj;
+package com.rain.yxj.product;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,6 +12,8 @@ import java.util.List;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.rain.yxj.R;
+import com.rain.yxj.product.Product;
 
 
 public class ProductAdapter extends ArrayAdapter<Product> {

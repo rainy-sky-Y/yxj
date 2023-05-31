@@ -1,4 +1,4 @@
-package com.rain.yxj;
+package com.rain.yxj.net;
 
 public interface CallBack {
     void onSuccess(String result);
